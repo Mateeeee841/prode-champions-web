@@ -5,7 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./css/styles.css" rel="stylesheet" />
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+<script>
+    $(document).ready(function() {
+        ordenarTablaPorPuntos();
+    });
+
+    function ordenarTablaPorPuntos() {
+        var rows = $('table > tbody > tr').get();
+    
+        rows.sort(function(a, b) {
+            var puntosA = parseInt($(a).children('td').eq(2).text()); // Obtiene el valor de puntos de la fila a
+            var puntosB = parseInt($(b).children('td').eq(2).text()); // Obtiene el valor de puntos de la fila b
+    
+            var resultadosA = parseInt($(a).children('td').eq(3).text()); // Obtiene el valor de resultados acertados de la fila a
+            var resultadosB = parseInt($(b).children('td').eq(3).text()); // Obtiene el valor de resultados acertados de la fila b
+    
+            if(puntosA < puntosB) {
+                return 1;
+            }
+            if(puntosA > puntosB) {
+                return -1;
+            }
+            
+            // Desempate por Resultados Acertados
+            if(resultadosA < resultadosB) {
+                return 1;
+            }
+            if(resultadosA > resultadosB) {
+                return -1;
+            }
+            
+            return 0;
+        });
+    
+        $.each(rows, function(index, row) {
+            $('table').children('tbody').append(row);
+        });
+        // Actualizar la columna de posiciones
+        $('table > tbody > tr').each(function(index, row) {
+        $(row).children('td').eq(0).text(index + 1); // Actualiza la columna de posición con el índice actual + 1
+    });
+    }
+</script>
+
 <body>
     <header class="header">
         <h1 class="header-titulo">Pocisiones Prode</h1>
@@ -31,8 +75,8 @@
                     <td>0</td>
                 </tr>
                 <!-- Fin de una fila de equipo -->
-            </tbody>
-            <tbody>
+            
+            
                 <!-- Puedes duplicar la siguiente fila para agregar más equipos -->
                 <tr>
                     <td>1</td>
@@ -41,8 +85,7 @@
                     <td>0</td>
                 </tr>
                 <!-- Fin de una fila de equipo -->
-            </tbody>
-            <tbody>
+            
                 <!-- Puedes duplicar la siguiente fila para agregar más equipos -->
                 <tr>
                     <td>1</td>
@@ -51,8 +94,7 @@
                     <td>0</td>
                 </tr>
                 <!-- Fin de una fila de equipo -->
-            </tbody>
-            <tbody>
+           
                 <!-- Puedes duplicar la siguiente fila para agregar más equipos -->
                 <tr>
                     <td>1</td>
@@ -61,8 +103,7 @@
                     <td>0</td>
                 </tr>
                 <!-- Fin de una fila de equipo -->
-            </tbody>
-            <tbody>
+           
                 <!-- Puedes duplicar la siguiente fila para agregar más equipos -->
                 <tr>
                     <td>1</td>
@@ -71,8 +112,7 @@
                     <td>0</td>
                 </tr>
                 <!-- Fin de una fila de equipo -->
-            </tbody>
-            <tbody>
+          
                 <!-- Puedes duplicar la siguiente fila para agregar más equipos -->
                 <tr>
                     <td>1</td>
